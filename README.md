@@ -6,6 +6,7 @@ This project is the backend for the Haki Hub, handling the main backend function
 
 The project is organized using a **Modular Paradigm** as follows:
 
+```code
 .
 │
 ├── app
@@ -60,6 +61,7 @@ The project is organized using a **Modular Paradigm** as follows:
    ```bash
    python3 -m venv haki_backend
    ```
+
    - To activate environment in windows type:
    ```bash
    haki_backend/Scripts/activate
