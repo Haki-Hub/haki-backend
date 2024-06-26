@@ -7,28 +7,31 @@ This project is the backend for the Haki Hub, handling the main backend function
 The project is organized using a **Modular Paradigm** as follows:
 
 ```code
+.
 │
-├── flask_app/
-│   ├── app/
-│   │   ├── __init__.py             # Initialize the Flask application and register blueprints
-│   │   ├── routes/
-│   │   │   ├── __init__.py         # Init file for routes module
-│   │   │   ├── main.py             # Main routes for the application
-│   │   │   ├── wagtail.py          # Routes for Wagtail API communication
-│   │   ├── models.py               # Database models
-│   │   ├── services/
-│   │       ├── __init__.py         # Init file for services module
-│   │       ├── wagtail_service.py  # Service functions for Wagtail API communication
-│   ├── migrations/                 # Database migration files
-│   ├── tests/
-│   │   ├── test_basic.py           # Basic tests for the application
-│   ├── config.py                   # Configuration settings
-│   ├── requirements.txt            # List of dependencies
-│   ├── run.py                      # Entry point to run the Flask application
+├── app
+│   ├── __init__.py             # Initialize the Flask application and register blueprints
+│   ├── routes/
+│   │   ├── __init__.py         # Init file for routes module
+│   │   ├── main.py             # Main routes for the application
+│   │   ├── wagtail.py          # Routes for Wagtail API communication
+│   ├── models.py               # Database models
+│   ├── services/
+│   │   ├── __init__.py         # Init file for services module
+│   │   ├── wagtail_service.py  # Service functions for Wagtail API communication
 │
-├── .env                            # Environment variables
-├── .gitignore                      # Git ignore file
-├── README.md                       # Project documentation
+├── migrations/                 # Database migration files
+│
+├── tests/
+│   ├── test_basic.py           # Basic tests for the application
+│
+├── config.py                   # Configuration settings
+├── requirements.txt            # List of dependencies
+├── run.py                      # Entry point to run the Flask application
+│
+├── .env                        # Environment variables
+├── .gitignore                  # Git ignore file
+├── README.md                   # Project documentation
 ```
 
 ## Getting Started
@@ -44,7 +47,7 @@ The project is organized using a **Modular Paradigm** as follows:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/haki-hub/haki-backend.git
+    git clone https://github.com/haki-hub/haki-backend.git ; cd haki-backend
     ```
 
 2. **Create and activate a Conda environment:**
@@ -54,10 +57,24 @@ The project is organized using a **Modular Paradigm** as follows:
    conda activate haki_backend
    ```
 
+   **Or for Venv:**
+   ```bash
+   python3 -m venv haki_backend
+   ```
+
+   - To activate environment in windows type:
+   ```bash
+   haki_backend/Scripts/activate
+   ```
+   - To activate environment in Linux type:
+   ```bash
+   source haki_backend/bin/activate
+   ```
+
 3. **Install dependencies:**
 
    ```python
-   pip install -r flask_app/requirements.txt
+   pip install -r requirements.txt
    ```
 
 4. **Set up the environment variables:**
@@ -73,40 +90,38 @@ The project is organized using a **Modular Paradigm** as follows:
 5. **Run the application:**
 
    ```bash
-   cd flask_app
    python run.py
    ```
 
 ## Project Structure Details
 
-- **flask_app/app/**init**.py**: Initializes the Flask application, sets up the configuration, and registers the blueprints for routes.
+- **app/**init**.py**: Initializes the Flask application, sets up the configuration, and registers the blueprints for routes.
 
-- **flask_app/app/routes/**:
+- **app/routes/**:
   - `main.py`: Contains the main routes for the application, including the home and index routes.
   - `wagtail.py`: Contains routes for communicating with the Wagtail CMS API.
 
-- **flask_app/app/models.py**: Defines the database models for the application.
+- **app/models.py**: Defines the database models for the application.
 
-- **flask_app/app/services/**:
+- **app/services/**:
   - `wagtail_service.py`: Contains functions to interact with the Wagtail API.
 
-- **flask_app/migrations/**: Directory for database migration files, managed by Flask-Migrate.
+- **migrations/**: Directory for database migration files, managed by Flask-Migrate.
 
-- **flask_app/tests/**:
+- **tests/**:
   - `test_basic.py`: Contains basic tests to ensure the application is working correctly.
 
-- **flask_app/config.py**: Contains configuration settings for the Flask application, including database URI and Wagtail API base URL.
+- **config.py**: Contains configuration settings for the Flask application, including database URI and Wagtail API base URL.
 
-- **flask_app/requirements.txt**: Lists the dependencies required for the Flask application.
+- **requirements.txt**: Lists the dependencies required for the Flask application.
 
-- **flask_app/run.py**: Entry point to run the Flask application.
+- **run.py**: Entry point to run the Flask application.
 
 ## Running Tests
 
 To run the tests, use the following command:
 
 ```python
-cd flask_app
 python -m unittest discover -s tests
 ```
 
@@ -115,7 +130,7 @@ python -m unittest discover -s tests
 To deploy the application, follow these steps:
 
 1. Set up the environment variables on the server.
-2. Install the dependencies using `pip install -r flask_app/requirements.txt`.
+2. Install the dependencies using `pip install -r requirements.txt`.
 3. Use a WSGI server like Gunicorn to serve the Flask application.
 4. Set up a reverse proxy using Nginx or Apache to forward requests to the WSGI server.
 
