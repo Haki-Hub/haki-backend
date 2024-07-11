@@ -1,13 +1,8 @@
-import os
-from dotenv import load_dotenv
 from app import create_app
+from flask_migrate import MigrateCommand
+import os
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Create the Flask application instance
 app = create_app()
 
 if __name__ == '__main__':
-    # Run the Flask application in debug mode
-    app.run(debug=True)
+    app.run()
