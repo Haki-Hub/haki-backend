@@ -1,6 +1,17 @@
-from flask_sqlalchemy import SQLAlchemy
+from app import db
 
-db = SQLAlchemy()
+class Category(db.Model):
+    __tablename__ = 'categories'
+    category_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False, unique=True)
+    bills = db.relationship('Bill', backref='category_obj', lazy=True, cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            'category_id': self.category_id,
+            'name': self.name,
+            'bills': [bill.to_dict() for bill in self.bills]
+        }
 
 class Bill(db.Model):
     __tablename__ = 'bills'
@@ -8,7 +19,7 @@ class Bill(db.Model):
     title = db.Column(db.String(255), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     clauses = db.Column(db.Text, nullable=False)
-    category = db.Column(db.String(255), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.category_id'), nullable=False)
     parts = db.relationship('Part', backref='bill', lazy=True, cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -17,7 +28,7 @@ class Bill(db.Model):
             'title': self.title,
             'year': self.year,
             'clauses': self.clauses,
-            'category': self.category,
+            'category': self.category_obj.name,
             'parts': [part.to_dict() for part in self.parts]
         }
 
